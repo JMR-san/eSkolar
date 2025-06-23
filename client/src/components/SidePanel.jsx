@@ -1,6 +1,18 @@
 export const SidePanel = () => {
-    return <div>
-        <div className="h-40 bg-sidebar-logo">
+    return <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundImage: 'url("src/assets/pylon.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: '60% 40%',
+            opacity: 0.5,
+            zIndex: 0
+        }} />
+        <div className="h-40 bg-sidebar-logo" style={{ position: 'relative', zIndex: 1 }}>
             <img 
                 src="src/assets/eskolar.png" 
                 alt="eskolar" 
