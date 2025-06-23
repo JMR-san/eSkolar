@@ -1,6 +1,92 @@
 import { Contact, GraduationCap, Users } from "lucide-react";
 import { useState } from "react";
 
+const PROGRAM_OPTIONS = [
+    "Bachelor in Advertising and Public Relations (BADPR)",
+    "Bachelor of Arts in Broadcasting (BABR or BA Broadcasting)",
+    "Bachelor of Arts in Communication Research (BACR)",
+    "Bachelor of Arts in English Language Studies (ABELS)",
+    "Bachelor of Arts in Filipinology (ABF)",
+    "Bachelor of Arts in History (BAH)",
+    "Bachelor of Arts in International Studies (BAIS)",
+    "Bachelor of Arts in Literary and Cultural Studies (ABLCS)",
+    "Bachelor of Arts in Philosophy (AB-PHILO)",
+    "Bachelor of Arts in Political Economy (BAPE)",
+    "Bachelor of Arts in Political Science (BAPS)",
+    "Bachelor of Arts in Sociology (BAS)",
+    "Bachelor of Performing Arts major in Theater Arts (BPEA)",
+    "Bachelor of Physical Education (BPE)",
+    "Bachelor of Public Administration (BPA)",
+    "Bachelor of Science in Accountancy (BSA)",
+    "Bachelor of Science in Applied Mathematics (BSAPMATH)",
+    "Bachelor of Science in Architecture (BS-ARCH)",
+    "Bachelor of Science in Biology (BSBIO)",
+    "Bachelor of Science in Business Administration major in Financial Management (BSBAFM)",
+    "Bachelor of Science in Business Administration major in Human Resource Management (BSBAHRM)",
+    "Bachelor of Science in Business Administration major in Marketing Management (BSBAMM)",
+    "Bachelor of Science in Chemistry (BSCHEM)",
+    "Bachelor of Science in Civil Engineering (BSCE)",
+    "Bachelor of Science in Computer Engineering (BSCpE)",
+    "Bachelor of Science in Computer Science (BSCS)",
+    "Bachelor of Science in Cooperatives (BSC)",
+    "Bachelor of Science in Economics (BSE)",
+    "Bachelor of Science in Electrical Engineering (BSEE)",
+    "Bachelor of Science in Electronics Engineering (BSECE)",
+    "Bachelor of Science in Environmental Planning (BSEP)",
+    "Bachelor of Science in Exercises and Sports Sciences (BSESS)",
+    "Bachelor of Science in Food Technology (BSFT)",
+    "Bachelor of Science in Hospitality Management (BSHM)",
+    "Bachelor of Science in Industrial Engineering (BSIE)",
+    "Bachelor of Science in Information Technology (BSIT)",
+    "Bachelor of Science in Interior Design (BSID)",
+    "Bachelor of Science in Management Accounting (BSMA)",
+    "Bachelor of Science in Mathematics (BSMATH)",
+    "Bachelor of Science in Mechanical Engineering (BSME)",
+    "Bachelor of Science in Nutrition and Dietetics (BSND)",
+    "Bachelor of Science in Office Administration (BSOA)",
+    "Bachelor of Science in Physics (BSPHY)",
+    "Bachelor of Science in Psychology (BSPSY)",
+    "Bachelor of Science in Railway Engineering (BSRE)",
+    "Bachelor of Science in Statistics (BSSTAT)",
+    "Bachelor of Science in Tourism Management (BSTM)",
+    "Bachelor of Science in Transportation Management (BSTRM)",
+    "Bachelor of Secondary Education (BSEd) major in English",
+    "Bachelor of Secondary Education (BSEd) major in Mathematics",
+    "Bachelor of Secondary Education (BSEd) major in Science",
+    "Bachelor of Secondary Education (BSEd) major in Filipino",
+    "Bachelor of Secondary Education (BSEd) major in Social Studies",
+    "Bachelor of Elementary Education (BEEd)",
+    "Bachelor of Early Childhood Education (BECEd)",
+    "Bachelor of Library and Information Science (BLIS)",
+    "Bachelor of Technology and Livelihood Education (BTLEd) major in Home Economics",
+    "Bachelor of Technology and Livelihood Education (BTLEd) major in Industrial Arts",
+    "Bachelor of Technology and Livelihood Education (BTLEd) major in Information and Communication Technology",
+    "Bachelor of Science in Entrepreneurship (BSENTREP)"
+];
+
+const GWA_OPTIONS = [
+    "1.00", "1.25", "1.5", "1.75", "2.00", "2.25", "2.50", "2.75", "3.00"
+];
+
+const STRAND_OPTIONS = [
+    "Science, Technology, Engineering, and Mathematics (STEM)",
+    "Accountancy, Business and Management (ABM)",
+    "Humanities and Social Sciences (HUMSS)",
+    "General Academic Strand (GAS)",
+    "Others",
+    "N/A"
+];
+
+const ANNUAL_INCOME_OPTIONS = [
+    "Below ₱200,000",
+    "₱200,001 – ₱250,000",
+    "₱250,001 – ₱300,000",
+    "₱300,001 – ₱350,000",
+    "₱350,001 – ₱400,000",
+    "₱400,001 – ₱600,000",
+    "Above ₱600,000"
+];
+
 const PersonalInformation = ({ formData, onChange }) => {
     return (
         <div className="step-form">
@@ -80,36 +166,31 @@ const AcademicInformation = ({ formData, onChange }) => {
             </div>
             <div className="form-group">
                 <label>Program/Course:</label>
-                <input
-                    type="text"
+                <select
                     name="program"
                     value={formData.AcademicInformation.program}
                     onChange={onChange}
-                    placeholder="Enter your program/course"
-                />
+                >
+                    <option value="">Select Program/Course</option>
+                    {PROGRAM_OPTIONS.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label>GWA (General Weighted Average):</label>
                 <input
-                    type="number"
+                    list="gwa-options"
                     name="gwa"
                     value={formData.AcademicInformation.gwa}
                     onChange={onChange}
-                    placeholder="e.g., 1.25"
-                    step="0.01"
-                    min="1.0"
-                    max="5.0"
+                    placeholder="e.g., 1.25 or text"
                 />
-            </div>
-            <div className="form-group">
-                <label>Current Strand (if applicable):</label>
-                <input
-                    type="text"
-                    name="currStrand"
-                    value={formData.AcademicInformation.currStrand}
-                    onChange={onChange}
-                    placeholder="Enter your current strand"
-                />
+                <datalist id="gwa-options">
+                    {GWA_OPTIONS.map(option => (
+                        <option key={option} value={option} />
+                    ))}
+                </datalist>
             </div>
             <div className="form-group">
                 <label>
@@ -133,6 +214,20 @@ const AcademicInformation = ({ formData, onChange }) => {
                     Are you currently receiving other scholarships?
                 </label>
             </div>
+            <h3>If currently a Senior High School Student:</h3>
+            <div className="form-group">
+                <label>Current Strand (if applicable):</label>
+                <select
+                    name="currStrand"
+                    value={formData.AcademicInformation.currStrand}
+                    onChange={onChange}
+                >
+                    <option value="">Select Current Strand</option>
+                    {STRAND_OPTIONS.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
+            </div>
             <div className="form-group">
                 <label>
                     <input
@@ -141,9 +236,10 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.AcademicInformation.isTopStudent}
                         onChange={onChange}
                     />
-                    Are you a top student in your class?
+                    If you are a Non-STEM student: Are you part of the top 5% of your graduating class?
                 </label>
             </div>
+            <h3>If currently a College Student:</h3>
             <div className="form-group">
                 <label>
                     <input
@@ -152,7 +248,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.AcademicInformation.isLowMajorGrade}
                         onChange={onChange}
                     />
-                    Do you have low grades in major subjects?
+                    Do you have a grade lower than 2.25 in your major subjects?
                 </label>
             </div>
             <div className="form-group">
@@ -163,7 +259,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.AcademicInformation.isLowMinorGrade}
                         onChange={onChange}
                     />
-                    Do you have low grades in minor subjects?
+                    Do you have a grade lower than 2.50 in your minor subjects?
                 </label>
             </div>
             <div className="form-group">
@@ -174,7 +270,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.AcademicInformation.isRegular}
                         onChange={onChange}
                     />
-                    Are you a regular student?
+                    Are you currently a regular student?
                 </label>
             </div>
             <div className="form-group">
@@ -185,7 +281,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.AcademicInformation.isBadGrade}
                         onChange={onChange}
                     />
-                    Do you have any failing grades?
+                    Do you have any failed, INC, dropped, or withdrawn final grades?
                 </label>
             </div>
         </div>
@@ -198,13 +294,16 @@ const SocialInformation = ({ formData, onChange }) => {
             <h2>Social Information</h2>
             <div className="form-group">
                 <label>Annual Household Income:</label>
-                <input
-                    type="number"
+                <select
                     name="annualHouseIncome"
                     value={formData.SocialInformation.annualHouseIncome}
                     onChange={onChange}
-                    placeholder="Enter annual household income"
-                />
+                >
+                    <option value="">Select Annual Household Income</option>
+                    {ANNUAL_INCOME_OPTIONS.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label>
@@ -327,9 +426,18 @@ export const MultiSteps = ({ onStepDataChange }) => {
     return (
         <div className="multi-steps-container">
             <div className="step-indicator">
-                <div className={`step ${currentStep >= 1 ? 'active' : ''}`}><Contact /> Personal</div>
-                <div className={`step ${currentStep >= 2 ? 'active' : ''}`}><GraduationCap /> Academic</div>
-                <div className={`step ${currentStep >= 3 ? 'active' : ''}`}><Users /> Social</div>
+                <div className={`step ${currentStep >= 1 ? 'active' : ''}`}>
+                  <Contact size={24}  className="icon-color"/>
+                  <span>Personal</span>
+                </div>
+                <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+                  <GraduationCap size={24} className="icon-color"/>
+                  <span>Academic</span>
+                </div>
+                <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
+                  <Users size={24} className="icon-color"/>
+                  <span>Social</span>
+                </div>
             </div>
             
             {renderStep()}

@@ -75,16 +75,25 @@
 
 .step {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  border-radius: 10%;
   background-color: hsl(var(--muted));
-  color: hsl(var(--muted-foreground));
+  color: black;
   font-weight: 600;
   position: relative;
+  z-index: 1;
   transition: all 0.3s ease;
+  gap: 2px;
+}
+
+.step span, .icon-color{
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 2px;
 }
 
 .step.active {
@@ -92,15 +101,17 @@
   color: hsl(var(--primary-foreground));
 }
 
+/* Line Indicator */
 .step:not(:last-child)::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 100%;
-  width: 100px;
+  width: 250px;
   height: 2px;
   background-color: hsl(var(--border));
   transform: translateY(-50%);
+  z-index: 0;
 }
 
 .step.active:not(:last-child)::after {
@@ -111,11 +122,20 @@
   margin-bottom: 2rem;
 }
 
-.step-form h2 {
+.step-form h2, h3{
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: hsl(var(--foreground));
+  color: #000 !important;
+}
+
+.step-form h3{
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: hsl(var(--foreground));
+  color: #000 !important; 
 }
 
 .form-group {
@@ -126,11 +146,12 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: hsl(var(--foreground));
+  color: #000 !important;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
+.form-group input,
 .form-group select {
   width: 100%;
   padding: 0.75rem;
