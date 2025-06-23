@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-logo: hsl(var(--sidebar-logo));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(var(--card));
+
+  /* Animation for progress tb follow */
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%; 
+    --sidebar: 3 83% 16%;
+    --sidebar-logo: 0 0% 100%;
+    --sidebar-logo-text: filter none;
+    --card: 0 0% 100%;
+
+    --primary: 1 93% 24%;
+    --primary-foreground: 47 95% 70%;
+
+    --border: 0 0% 25%;
+  }
+
+  .dark {
+    --background: 3 83% 16%;
+    --foreground: 0 0% 100%;
+    --sidebar: 0 0% 100%;
+    --sidebar-logo: 3 83% 16%;
+    --sidebar-logo-text: filter brightness(1);
+
+    --card: 0 0% 100%;
+
+    --primary: 1 93% 24%;
+    --primary-foreground: 47 95% 70%;
+
+    --border: 0 0% 85%;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+
+  @media(min-width: 640px){
+    max-width: 640px;
+  }
+  @media(min-width: 768px){
+    max-width: 768px;
+  }
+  @media(min-width: 1024px){
+    max-width: 1024px;
+  }
+  @media(min-width: 1280px){
+    max-width: 1280px;
+  }
+  @media(min-width: 1400px){
+    max-width: 1400px;
+  }
+}
+/* to be follow effects */
+@utility text-glow {
+  @apply relative;
+  
+}
+
+@utility card-hover {
+  @apply transition-transform  duration-300 hover:scale-[1.05] hover:shadow-lg;
+}
+
+@utility gradient-border {
+  @apply relative rounded-md;
+  background: linear-gradient(to right, hsl(var(--card)));
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+
+@utility btn {
+  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
+         transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]
+         hover:scale-105 active:scale-95;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
