@@ -112,9 +112,9 @@ class ScholarshipMatcher:
                 age_limit = self.safe_str(scholarship.get("age", ""))
                 if age_limit and age_limit not in ["", "any", "n/a", "nan"]:
                     try:
-                        if self.user_data["age"] < float(age_limit):
+                        if float(self.user_data["age"]) < float(age_limit):
                             continue
-                    except ValueError:
+                    except (ValueError, TypeError):
                         pass
 
                 required_citizenship = self.safe_str(scholarship.get("citizenship", "filipino"))
@@ -163,9 +163,9 @@ class ScholarshipMatcher:
                 min_gwa = self.safe_str(scholarship.get("gwa_numerical", ""))
                 if min_gwa and min_gwa not in ["n/a", "any", "", "nan"]:
                     try:
-                        if self.user_data["curr_gwa"] > float(min_gwa):
+                        if float(self.user_data["curr_gwa"]) > float(min_gwa):
                             continue
-                    except ValueError:
+                    except (ValueError, TypeError):
                         pass
 
                 if self.to_bool(self.safe_str(scholarship.get("good_moral", "yes"))):
@@ -199,9 +199,9 @@ class ScholarshipMatcher:
                 max_income = self.safe_str(scholarship.get("annual_household_income", "")).replace(",", "")
                 if max_income and max_income not in ["", "any", "n/a", "nan"]:
                     try:
-                        if self.user_data["annual_household_income"] > int(max_income):
+                        if float(self.user_data["annual_household_income"]) > float(max_income):
                             continue
-                    except ValueError:
+                    except (ValueError, TypeError):
                         pass
 
                 not_working = self.safe_str(scholarship.get("not_a_working_student", ""))

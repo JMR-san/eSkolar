@@ -3,6 +3,7 @@
 from flask import Flask, request, jsonify #render_test (for testing -- can remove)
 from backend.algorithms.matcher_main import ScholarshipMatcher
 from flask_cors import CORS
+import math
 
 app = Flask(__name__)
 CORS(app)
@@ -16,6 +17,17 @@ matcher.load_scholarships() #loads when flask starts
 #def home():
 #    return render_test ('index.html')
 
+def clean_json(obj):
+    if isinstance(obj, dict):
+        return {k: clean_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_json(v) for v in obj]
+    elif isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return None
+        return obj
+    return obj
+
 @app.route('/match', methods=['POST'])
 def match_scholarships():
     user_data = request.json  #receives user data from fe (form)
@@ -25,4 +37,5 @@ def match_scholarships():
     matches = matcher.filter_scholarships()  #pass the fe data
     sorted_matches = matcher.sort_scholarships(matches)  #sort matches
 
-    return jsonify(sorted_matches)  #return result/s back to fe as json
+    # Clean the data before returning
+    return jsonify(clean_json(sorted_matches))  #return result/s back to fe as json

@@ -96,7 +96,7 @@ const PersonalInformation = ({ formData, onChange }) => {
                 <input
                     type="number"
                     name="age"
-                    value={formData.PersonalInformation.age}
+                    value={formData.personal_information.age}
                     onChange={onChange}
                     placeholder="Enter your age"
                 />
@@ -106,7 +106,7 @@ const PersonalInformation = ({ formData, onChange }) => {
                 <input
                     type="text"
                     name="citizenship"
-                    value={formData.PersonalInformation.citizenship}
+                    value={formData.personal_information.citizenship}
                     onChange={onChange}
                     placeholder="Enter your citizenship"
                 />
@@ -116,7 +116,7 @@ const PersonalInformation = ({ formData, onChange }) => {
                 <input
                     type="text"
                     name="residence"
-                    value={formData.PersonalInformation.residence}
+                    value={formData.personal_information.residence}
                     onChange={onChange}
                     placeholder="Enter your current residence"
                 />
@@ -125,8 +125,8 @@ const PersonalInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isGoodHealth"
-                        checked={formData.PersonalInformation.isGoodHealth}
+                        name="is_physically_fit"
+                        checked={formData.personal_information.is_physically_fit}
                         onChange={onChange}
                     />
                     Are you physically fit and of good health?
@@ -143,8 +143,8 @@ const AcademicInformation = ({ formData, onChange }) => {
             <div className="form-group">
                 <label>Year Level:</label>
                 <select
-                    name="yearLevel"
-                    value={formData.AcademicInformation.yearLevel}
+                    name="incoming_year_level"
+                    value={formData.academic_information.incoming_year_level}
                     onChange={onChange}
                 >
                     <option value="">Select Year Level</option>
@@ -158,8 +158,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>Expected Graduation Year:</label>
                 <input
                     type="number"
-                    name="gradYear"
-                    value={formData.AcademicInformation.gradYear}
+                    name="graduation_year"
+                    value={formData.academic_information.graduation_year}
                     onChange={onChange}
                     placeholder="e.g., 2025"
                 />
@@ -167,8 +167,8 @@ const AcademicInformation = ({ formData, onChange }) => {
             <div className="form-group">
                 <label>Program/Course:</label>
                 <select
-                    name="program"
-                    value={formData.AcademicInformation.program}
+                    name="curr_program"
+                    value={formData.academic_information.curr_program}
                     onChange={onChange}
                 >
                     <option value="">Select Program/Course</option>
@@ -181,8 +181,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>GWA (General Weighted Average):</label>
                 <input
                     list="gwa-options"
-                    name="gwa"
-                    value={formData.AcademicInformation.gwa}
+                    name="curr_gwa"
+                    value={formData.academic_information.curr_gwa}
                     onChange={onChange}
                     placeholder="e.g., 1.25 or text"
                 />
@@ -196,8 +196,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isGoodMoral"
-                        checked={formData.AcademicInformation.isGoodMoral}
+                        name="is_good_moral"
+                        checked={formData.academic_information.is_good_moral}
                         onChange={onChange}
                     />
                     Do you have good moral character?
@@ -207,8 +207,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isOtherScholar"
-                        checked={formData.AcademicInformation.isOtherScholar}
+                        name="has_other_scholarships"
+                        checked={formData.academic_information.has_other_scholarships}
                         onChange={onChange}
                     />
                     Are you currently receiving other scholarships?
@@ -218,8 +218,8 @@ const AcademicInformation = ({ formData, onChange }) => {
             <div className="form-group">
                 <label>Current Strand (if applicable):</label>
                 <select
-                    name="currStrand"
-                    value={formData.AcademicInformation.currStrand}
+                    name="current_shs_strand"
+                    value={formData.academic_information.current_shs_strand}
                     onChange={onChange}
                 >
                     <option value="">Select Current Strand</option>
@@ -232,8 +232,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isTopStudent"
-                        checked={formData.AcademicInformation.isTopStudent}
+                        name="top_graduating_class"
+                        checked={formData.academic_information.top_graduating_class}
                         onChange={onChange}
                     />
                     If you are a Non-STEM student: Are you part of the top 5% of your graduating class?
@@ -244,8 +244,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isLowMajorGrade"
-                        checked={formData.AcademicInformation.isLowMajorGrade}
+                        name="no_below_225_major"
+                        checked={formData.academic_information.no_below_225_major}
                         onChange={onChange}
                     />
                     Do you have a grade lower than 2.25 in your major subjects?
@@ -255,8 +255,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isLowMinorGrade"
-                        checked={formData.AcademicInformation.isLowMinorGrade}
+                        name="no_below_250_minor"
+                        checked={formData.academic_information.no_below_250_minor}
                         onChange={onChange}
                     />
                     Do you have a grade lower than 2.50 in your minor subjects?
@@ -266,8 +266,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isRegular"
-                        checked={formData.AcademicInformation.isRegular}
+                        name="regular_student"
+                        checked={formData.academic_information.regular_student}
                         onChange={onChange}
                     />
                     Are you currently a regular student?
@@ -277,8 +277,8 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isBadGrade"
-                        checked={formData.AcademicInformation.isBadGrade}
+                        name="no_failing_grade"
+                        checked={formData.academic_information.no_failing_grade}
                         onChange={onChange}
                     />
                     Do you have any failed, INC, dropped, or withdrawn final grades?
@@ -295,8 +295,8 @@ const SocialInformation = ({ formData, onChange }) => {
             <div className="form-group">
                 <label>Annual Household Income:</label>
                 <select
-                    name="annualHouseIncome"
-                    value={formData.SocialInformation.annualHouseIncome}
+                    name="annual_household_income"
+                    value={formData.social_information.annual_household_income}
                     onChange={onChange}
                 >
                     <option value="">Select Annual Household Income</option>
@@ -309,8 +309,8 @@ const SocialInformation = ({ formData, onChange }) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="isWorking"
-                        checked={formData.SocialInformation.isWorking}
+                        name="is_working"
+                        checked={formData.social_information.is_working}
                         onChange={onChange}
                     />
                     Are you currently working?
@@ -322,29 +322,29 @@ const SocialInformation = ({ formData, onChange }) => {
 
 export const MultiSteps = ({ onStepDataChange }) => {
     const [formData, setFormData] = useState({
-        PersonalInformation: {
+        personal_information: {
             age: '',
             citizenship: '',
             residence: '',
-            isGoodHealth: false
+            is_physically_fit: false
         },
-        AcademicInformation: {
-            yearLevel: '',
-            gradYear: '',
-            program: '',
-            gwa: '',
-            isGoodMoral: false,
-            isOtherScholar: false,
-            currStrand: '',
-            isTopStudent: false,
-            isLowMajorGrade: false,
-            isLowMinorGrade: false,
-            isRegular: false,
-            isBadGrade: false
+        academic_information: {
+            incoming_year_level: '',
+            graduation_year: '',
+            curr_program: '',
+            curr_gwa: '',
+            is_good_moral: false,
+            has_other_scholarships: false,
+            current_shs_strand: '',
+            top_graduating_class: false,
+            no_below_225_major: false,
+            no_below_250_minor: false,
+            regular_student: false,
+            no_failing_grade: false
         },
-        SocialInformation: {
-            annualHouseIncome: '',
-            isWorking: false
+        social_information: {
+            annual_household_income: '',
+            is_working: false
         }
     });
 
@@ -360,24 +360,24 @@ export const MultiSteps = ({ onStepDataChange }) => {
             if (currentStep === 1) {
                 newData = {
                     ...prevData,
-                    PersonalInformation: {
-                        ...prevData.PersonalInformation,
+                    personal_information: {
+                        ...prevData.personal_information,
                         [name]: fieldValue
                     }
                 };
             } else if (currentStep === 2) {
                 newData = {
                     ...prevData,
-                    AcademicInformation: {
-                        ...prevData.AcademicInformation,
+                    academic_information: {
+                        ...prevData.academic_information,
                         [name]: fieldValue
                     }
                 };
             } else if (currentStep === 3) {
                 newData = {
                     ...prevData,
-                    SocialInformation: {
-                        ...prevData.SocialInformation,
+                    social_information: {
+                        ...prevData.social_information,
                         [name]: fieldValue
                     }
                 };
@@ -386,11 +386,11 @@ export const MultiSteps = ({ onStepDataChange }) => {
             // Pass the updated data back to parent component
             if (onStepDataChange) {
                 if (currentStep === 1) {
-                    onStepDataChange(newData.PersonalInformation, currentStep);
+                    onStepDataChange(newData.personal_information, currentStep);
                 } else if (currentStep === 2) {
-                    onStepDataChange(newData.AcademicInformation, currentStep);
+                    onStepDataChange(newData.academic_information, currentStep);
                 } else if (currentStep === 3) {
-                    onStepDataChange(newData.SocialInformation, currentStep);
+                    onStepDataChange(newData.social_information, currentStep);
                 }
             }
             
@@ -421,6 +421,12 @@ export const MultiSteps = ({ onStepDataChange }) => {
             default:
                 return <PersonalInformation formData={formData} onChange={handleInputChange} />;
         }
+    };
+
+    const handleSubmit = () => {
+        // Implement form submission logic
+        console.log('Form submitted:', formData);
+        onStepDataChange(formData, currentStep, true);
     };
 
     return (
@@ -454,7 +460,7 @@ export const MultiSteps = ({ onStepDataChange }) => {
                     </button>
                 )}
                 {currentStep === 3 && (
-                    <button onClick={() => console.log('Form submitted:', formData)} className="btn-submit">
+                    <button onClick={handleSubmit} className="btn-submit">
                         Submit
                     </button>
                 )}
