@@ -2,10 +2,10 @@
 
 from flask import Flask, request, jsonify #render_test (for testing -- can remove)
 from backend.algorithms.matcher_main import ScholarshipMatcher
-#from flask_cors import CORS -- for react
+from flask_cors import CORS
 
 app = Flask(__name__)
-#CORS(app) -- for react
+CORS(app)
 
 #csv loads here w/ matcher obj
 matcher = ScholarshipMatcher('backend/data/scholarships_data - 1NF.csv')
