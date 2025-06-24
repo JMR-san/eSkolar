@@ -8,6 +8,7 @@
 
 .side-panel {
   width: 30%;
+  position: sticky;
   height: full;
   background-color: hsl(var(--sidebar));
   flex-shrink: 0;
