@@ -78,31 +78,54 @@ export const Home = () => {
         }
     };
 
+    const sidePanelStyle = {
+        width: '30%',
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        backgroundColor: 'hsl(var(--sidebar))',
+        zIndex: 10,
+        overflow: 'hidden',
+        minHeight: '100vh',
+        maxHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+    };
+    const mainContentStyle = {
+        marginLeft: '30%', // To prevent overlap with the fixed side panel
+        flex: 1,
+        padding: '2rem',
+        position: 'relative',
+        zIndex: 1,
+    };
+
     return <div className="home-container">
-        <div className="side-panel">
+        <div className="side-panel" style={sidePanelStyle}>
             <SidePanel />
         </div>
-        {/* Theme */}
-        <div className="theme-toggle-container">
-            <ThemeToogle />
-        </div>
-        {/* Test content to see dark mode */}
-        <div className="test-content">
-            <h1 className="test-title">Welcome to eSkolar</h1>
-            <div>
-                <MultiSteps onStepDataChange={handleStepDataChange} />
+        <div className="main-content" style={mainContentStyle}>
+            <div className="theme-toggle-container">
+                <ThemeToogle />
             </div>
-            {/* Display current step data */}
-            {currentStepData && (
-                <div className="step-data-display">
-                    <h3>Current Step {currentStep} Data:</h3>
-                    <pre>{JSON.stringify(currentStepData, null, 2)}</pre>
+            {/* Test content to see dark mode */}
+            <div className="test-content">
+                <h1 className="test-title">Welcome to eSkolar</h1>
+                <div>
+                    <MultiSteps onStepDataChange={handleStepDataChange} />
                 </div>
-            )}
-            {/* Display all form data */}
-            <div className="all-form-data">
-                <h3>All Form Data:</h3>
-                <pre>{JSON.stringify(allFormData, null, 2)}</pre>
+                {/* Display current step data */}
+                {currentStepData && (
+                    <div className="step-data-display">
+                        <h3>Current Step {currentStep} Data:</h3>
+                        <pre>{JSON.stringify(currentStepData, null, 2)}</pre>
+                    </div>
+                )}
+                {/* Display all form data */}
+                <div className="all-form-data">
+                    <h3>All Form Data:</h3>
+                    <pre>{JSON.stringify(allFormData, null, 2)}</pre>
+                </div>
             </div>
         </div>
     </div>

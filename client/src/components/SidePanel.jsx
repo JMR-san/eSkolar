@@ -10,7 +10,8 @@ export const SidePanel = () => {
             backgroundSize: 'cover',
             backgroundPosition: '60% 40%',
             opacity: 0.5,
-            zIndex: 0
+            zIndex: 0,
+            pointerEvents: 'none',
         }} />
         <div className="h-40 bg-sidebar-logo" style={{ position: 'relative', zIndex: 1 }}>
             <img 

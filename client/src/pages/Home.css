@@ -254,3 +254,40 @@
   color: hsl(var(--foreground));
   border: 1px solid hsl(var(--border));
 }
+
+.scholarship-link {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: normal;
+  display: block;
+  max-width: 100%;
+  cursor: pointer;
+  z-index: 1000;
+  position: relative;
+  pointer-events: auto;
+}
+
+.scholarship-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
+.user-inputs-section, .scholarships-section {
+  color: #222 !important;
+}
+
+.results-title h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.user-inputs-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.scholarships-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
