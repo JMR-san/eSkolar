@@ -30,12 +30,18 @@ def clean_json(obj):
 
 @app.route('/match', methods=['POST'])
 def match_scholarships():
-    user_data = request.json  #receives user data from fe (form)
-    user_data['curr_gwa'] = matcher.converted_gwa(user_data.get('curr_gwa', 5.0)) #gwa conversion
+    user_data_nested = request.json  # receives user data from fe (form)
+    # Flatten the nested user input
+    user_data = {}
+    user_data.update(user_data_nested.get('personal_information', {}))
+    user_data.update(user_data_nested.get('academic_information', {}))
+    user_data.update(user_data_nested.get('social_information', {}))
+    # GWA conversion
+    user_data['curr_gwa'] = matcher.converted_gwa(user_data.get('curr_gwa', 5.0))
 
     matcher.user_data = user_data
-    matches = matcher.filter_scholarships()  #pass the fe data
-    sorted_matches = matcher.sort_scholarships(matches)  #sort matches
+    matches = matcher.filter_scholarships()  # pass the fe data
+    sorted_matches = matcher.sort_scholarships(matches)  # sort matches
 
     # Clean the data before returning
-    return jsonify(clean_json(sorted_matches))  #return result/s back to fe as json
+    return jsonify(clean_json(sorted_matches))  # return result/s back to fe as json

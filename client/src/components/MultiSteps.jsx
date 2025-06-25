@@ -74,18 +74,18 @@ const STRAND_OPTIONS = [
     "Humanities and Social Sciences (HUMSS)",
     "General Academic Strand (GAS)",
     "Others",
-    "N/A"
+    "n/a"
 ];
 
-const ANNUAL_INCOME_OPTIONS = [
-    "Below ₱200,000",
-    "₱200,001 – ₱250,000",
-    "₱250,001 – ₱300,000",
-    "₱300,001 – ₱350,000",
-    "₱350,001 – ₱400,000",
-    "₱400,001 – ₱600,000",
-    "Above ₱600,000"
-];
+// const ANNUAL_INCOME_OPTIONS = [
+//     "Below ₱200,000",
+//     "₱200,001 – ₱250,000",
+//     "₱250,001 – ₱300,000",
+//     "₱300,001 – ₱350,000",
+//     "₱350,001 – ₱400,000",
+//     "₱400,001 – ₱600,000",
+//     "Above ₱600,000"
+// ];
 
 const PersonalInformation = ({ formData, onChange }) => {
     return (
@@ -181,7 +181,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>GWA (General Weighted Average):</label>
                 <input
                     list="gwa-options"
-                    type="number"
+                    // type="number"
                     name="curr_gwa"
                     value={formData.academic_information.curr_gwa}
                     onChange={onChange}
@@ -295,7 +295,13 @@ const SocialInformation = ({ formData, onChange }) => {
             <h2>Social Information</h2>
             <div className="form-group">
                 <label>Annual Household Income:</label>
-                <select
+                <input 
+                type="text"
+                name="annual_household_income"
+                value={formData.social_information.annual_household_income}
+                onChange={onChange}
+                placeholder="Household Income"/>
+                {/* <select
                     name="annual_household_income"
                     value={formData.social_information.annual_household_income}
                     onChange={onChange}
@@ -304,7 +310,7 @@ const SocialInformation = ({ formData, onChange }) => {
                     {ANNUAL_INCOME_OPTIONS.map(option => (
                         <option key={option} value={option}>{option}</option>
                     ))}
-                </select>
+                </select> */}
             </div>
             <div className="form-group">
                 <label>

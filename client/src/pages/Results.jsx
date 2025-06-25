@@ -148,6 +148,10 @@ export const Results = () => {
                   let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                   if (key === 'no_below_225_major') label = 'No Below 2.25 Major';
                   if (key === 'no_below_250_minor') label = 'No Below 2.50 Minor';
+                  if (key === 'curr_program') label = 'College Program';
+                  if (key === 'curr_gwa') label = 'Current GWA';
+                  if (key === 'current_shs_strand') label = 'Senior Highschool Strand';
+                  if (key === 'is_good_moral') label = 'Has Good Moral';
                   
                   return (
                     <div key={key} className="user-input-item" style={styles.userInputItem}>

@@ -10,6 +10,7 @@
 import pandas as pd
 from typing import Dict, List, Any
 from datetime import datetime
+import time
 
 class ScholarshipMatcher:
     def __init__(self, file_path: str): 
@@ -91,6 +92,9 @@ class ScholarshipMatcher:
     #   checks user's input if it meets the requirements
     #   keeps scholarships that meet that match and skip that doesn't
     def filter_scholarships(self) -> List[Dict[str, Any]]:
+        print("[DEBUG] User data for matching:", self.user_data)
+        print("[RUNTIME] filter_scholarships is starting...")
+        start_time = time.time()
         if not self.scholarships:
             print("No scholarships loaded.")
             return []
@@ -102,29 +106,35 @@ class ScholarshipMatcher:
         
         for i, scholarship in enumerate(self.scholarships):
             try:
+                print(f"[DEBUG] Checking scholarship {i+1}: {scholarship.get('scholarship_program', '')}")
                 scholarship_name = self.safe_str(scholarship.get("scholarship_program", ""))
-                #some scholarships has certain condition like sa age, since there's only 2 lang from th data, i specified it nalang.
                 if scholarship_name == "original pilipino performing arts scholarship" and self.user_data["age"] < 16:
+                    print("[DEBUG] Skipped: age < 16 for OPPA scholarship")
                     continue
                 if scholarship_name == "nec foundation, inc." and self.user_data["age"] > 22:
+                    print("[DEBUG] Skipped: age > 22 for NEC scholarship")
                     continue
 
                 age_limit = self.safe_str(scholarship.get("age", ""))
                 if age_limit and age_limit not in ["", "any", "n/a", "nan"]:
                     try:
                         if float(self.user_data["age"]) < float(age_limit):
+                            print(f"[DEBUG] Skipped: user age {self.user_data['age']} < scholarship age limit {age_limit}")
                             continue
                     except (ValueError, TypeError):
+                        print("[DEBUG] Skipped: invalid age value")
                         pass
 
                 required_citizenship = self.safe_str(scholarship.get("citizenship", "filipino"))
                 if required_citizenship != "any" and required_citizenship != self.user_data["citizenship"].lower():
+                    print(f"[DEBUG] Skipped: citizenship mismatch {self.user_data['citizenship']} != {required_citizenship}")
                     continue
 
                 residence = self.safe_str(scholarship.get("residence", ""))
                 if residence and residence not in ["", "any", "n/a", "nan"]:
                     user_residence = self.user_data["residence"].lower()
                     if residence not in user_residence and user_residence not in residence:
+                        print(f"[DEBUG] Skipped: residence mismatch {user_residence} != {residence}")
                         continue
 
                 physically_fit = self.safe_str(scholarship.get("physically_fit", ""))
@@ -199,9 +209,9 @@ class ScholarshipMatcher:
                 max_income = self.safe_str(scholarship.get("annual_household_income", "")).replace(",", "")
                 if max_income and max_income not in ["", "any", "n/a", "nan"]:
                     try:
-                        if float(self.user_data["annual_household_income"]) > float(max_income):
+                        if float(self.user_data.get("annual_household_income", 0)) > float(max_income):
                             continue
-                    except (ValueError, TypeError):
+                    except (ValueError, TypeError, KeyError):
                         pass
 
                 not_working = self.safe_str(scholarship.get("not_a_working_student", ""))
@@ -220,10 +230,16 @@ class ScholarshipMatcher:
             print(f"Warning: {errors_count} scholarships had processing errors.")
         
         print(f"Found {len(filtered)} matching scholarships.")
+
+        end_time = time.time()
+        print(f"[RUNTIME] filter_scholarships finished in {end_time - start_time:.3f} seconds")
+        print(f"[DEBUG] Filtered scholarships: {[s.get('scholarship_program', '') for s in filtered]}")
         return filtered
 
     #sorts scholarships by name using binary search and lists it alphabetically (automatic) since naka-1NF na
     def sort_scholarships(self, scholarships: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        print("[RUNTIME] sort_scholarships is starting...")
+        start_time = time.time()
         def binary_insert(sorted_list, item):
             """Insert item into sorted_list using binary search to find the correct position."""
             left, right = 0, len(sorted_list) - 1
@@ -244,6 +260,8 @@ class ScholarshipMatcher:
         for scholarship in scholarships:
             binary_insert(sorted_scholarships, scholarship)
         
+        end_time = time.time()
+        print(f"[RUNTIME] sort_scholarships finished in {end_time - start_time:.3f} seconds")
         return sorted_scholarships
 
     #format: scholarship name, dl date of scholarship, gwa (if meron), and income requirement (if meron)
