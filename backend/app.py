@@ -7,7 +7,11 @@ import math
 import os
 
 app = Flask(__name__)
-CORS(app, origins=["https://e-skolar.vercel.app"])
+CORS(app,
+     origins=["https://e-skolar.vercel.app"],
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "OPTIONS"])
 
 #csv loads here w/ matcher obj
 matcher = ScholarshipMatcher('backend/data/scholarships_data - 1NF.csv')
@@ -29,8 +33,10 @@ def clean_json(obj):
         return obj
     return obj
 
-@app.route('/match', methods=['POST'])
+@app.route('/match', methods=['POST', 'OPTIONS'])
 def match_scholarships():
+    if request.method == "OPTIONS":
+        return '', 204
     print('[DEBUG] Raw request data:', request.data)
     print('[DEBUG] Raw request json:', request.get_json(force=True, silent=True))
     user_data_nested = request.json  # receives user data from fe (form)
