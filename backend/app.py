@@ -1,20 +1,21 @@
 #flask: to handle requests from form (react)
 
 from flask import Flask, request, jsonify #render_test (for testing -- can remove)
-from algorithms.matcher_main import ScholarshipMatcher
+from .algorithms.matcher_main import ScholarshipMatcher
 from flask_cors import CORS
 import math
 import os
 
 app = Flask(__name__)
 CORS(app,
-     origins=["https://e-skolar.vercel.app"],
+     origins=["http://localhost:5173", "https://e-skolar.vercel.app"],
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization"],
      methods=["GET", "POST", "OPTIONS"])
 
-#csv loads here w/ matcher obj
-matcher = ScholarshipMatcher('backend/data/scholarships_data - 1NF.csv')
+# Use absolute path for the CSV file
+DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'scholarships_data - 1NF.csv')
+matcher = ScholarshipMatcher(DATA_PATH)
 matcher.load_scholarships() #loads when flask starts
 
 #for testing -- can remove

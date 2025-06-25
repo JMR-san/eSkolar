@@ -63,8 +63,13 @@ export const Home = () => {
     };
 
     useEffect(() => {
+        const BACKEND_URL =
+            window.location.hostname === "localhost"
+                ? "http://localhost:5000"
+                : "https://eskolar.onrender.com";
+
         if (shouldSubmit) {
-            fetch("https://eskolar.onrender.com/match", {
+            fetch(`${BACKEND_URL}/match`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(allFormData)
