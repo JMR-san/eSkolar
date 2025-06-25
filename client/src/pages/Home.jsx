@@ -5,7 +5,7 @@ import { MultiSteps } from "../components/MultiSteps"
 import "./Home.css"
 import { useNavigate } from "react-router-dom";
 
-// Map frontend keys to backend keys (now all are snake_case, so this is a direct mapping)
+
 function mapToBackendKeys(formData) {
     return {
         // Personal Information
