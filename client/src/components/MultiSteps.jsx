@@ -181,6 +181,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                 <label>GWA (General Weighted Average):</label>
                 <input
                     list="gwa-options"
+                    type="number"
                     name="curr_gwa"
                     value={formData.academic_information.curr_gwa}
                     onChange={onChange}
