@@ -135,11 +135,26 @@ export const Results = () => {
           <h2>Your Information</h2>
           {userInputs && Object.keys(userInputs).length > 0 ? (
             <div className="user-inputs-list" style={styles.userInputsList}>
-              {Object.entries(userInputs).map(([key, value]) => (
-                <div key={key} className="user-input-item" style={styles.userInputItem}>
-                  <strong>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}:</strong> {String(value)}
-                </div>
-              ))}
+              {Object.entries(userInputs)
+                .filter(([key, value]) => value !== null && value !== undefined && value !== '' && value !== false)
+                .map(([key, value]) => {
+                  let displayValue = String(value);
+                  
+                  // Convert boolean true to "YES"
+                  if (value === true) {
+                    displayValue = 'Yes';
+                  }
+                  
+                  let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                  if (key === 'no_below_225_major') label = 'No Below 2.25 Major';
+                  if (key === 'no_below_250_minor') label = 'No Below 2.50 Minor';
+                  
+                  return (
+                    <div key={key} className="user-input-item" style={styles.userInputItem}>
+                      <strong>{label}:</strong> {displayValue}
+                    </div>
+                  );
+                })}
             </div>
           ) : (
             <div>No user input data available.</div>
@@ -176,7 +191,7 @@ export const Results = () => {
                       <h4>Requirements & Details</h4>
                       <ul>
                         {Object.entries(sch)
-                          .filter(([key, value]) => key !== 'scholarship_program' && key !== 'application_deadline' && value !== null && value !== '')
+                          .filter(([key, value]) => key !== 'scholarship_program' && key !== 'application_deadline' && key !== 'scholarship_id' && value !== null && value !== '')
                           .map(([key, value]) => {
                             let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                             if (key === 'no_below_225_major') label = 'No Below 2.25 Major';
@@ -184,14 +199,13 @@ export const Results = () => {
                             if ((key === 'scholarship_link') && value) {
                               return (
                                 <li key={key}>
-                                  <strong>{label}:</strong>{' '}
                                   <a
                                     href={value}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="scholarship-link"
                                   >
-                                    {value}
+                                    <strong>{label}</strong>{' '}
                                   </a>
                                 </li>
                               );

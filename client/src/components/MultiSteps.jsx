@@ -112,7 +112,7 @@ const PersonalInformation = ({ formData, onChange }) => {
                 />
             </div>
             <div className="form-group">
-                <label>Current Residence (City and Province):</label>
+                <label>Current Residence (City, Province):</label>
                 <input
                     type="text"
                     name="residence"
