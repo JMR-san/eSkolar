@@ -128,6 +128,7 @@ export const Home = () => {
                     <h3>All Form Data:</h3>
                     <pre>{JSON.stringify(allFormData, null, 2)}</pre>
                 </div>
+                <img src="/pylon.jpg" alt="Pylon" />
             </div>
         </div>
     </div>
