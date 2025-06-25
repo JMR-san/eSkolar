@@ -64,7 +64,7 @@ export const Home = () => {
 
     useEffect(() => {
         if (shouldSubmit) {
-            fetch("http://localhost:5000/match", {
+            fetch("https://eskolar.onrender.com/match", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(allFormData)
