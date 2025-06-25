@@ -1,10 +1,13 @@
 #flask: to handle requests from form (react)
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
 from flask import Flask, request, jsonify #render_test (for testing -- can remove)
-from .algorithms.matcher_main import ScholarshipMatcher
+from algorithms.matcher_main import ScholarshipMatcher
 from flask_cors import CORS
 import math
-import os
 
 app = Flask(__name__)
 CORS(app,
