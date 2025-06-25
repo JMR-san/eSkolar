@@ -7,7 +7,7 @@ import math
 import os
 
 app = Flask(__name__)
-CORS(app, origins=["https://eskolar.onrender.com"])
+CORS(app, origins=["https://e-skolar.vercel.app"])
 
 #csv loads here w/ matcher obj
 matcher = ScholarshipMatcher('backend/data/scholarships_data - 1NF.csv')
