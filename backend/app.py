@@ -1,7 +1,7 @@
 #flask: to handle requests from form (react)
 
 from flask import Flask, request, jsonify #render_test (for testing -- can remove)
-from backend.algorithms.matcher_main import ScholarshipMatcher
+from algorithms.matcher_main import ScholarshipMatcher
 from flask_cors import CORS
 import math
 import os
