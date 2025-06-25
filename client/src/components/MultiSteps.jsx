@@ -249,7 +249,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.academic_information.no_below_225_major}
                         onChange={onChange}
                     />
-                    Do you have a grade lower than 2.25 in your major subjects?
+                    Do not have a grade lower than 2.25 in your major subjects?
                 </label>
             </div>
             <div className="form-group">
@@ -260,7 +260,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.academic_information.no_below_250_minor}
                         onChange={onChange}
                     />
-                    Do you have a grade lower than 2.50 in your minor subjects?
+                    Do not have a grade lower than 2.50 in your minor subjects?
                 </label>
             </div>
             <div className="form-group">
@@ -282,7 +282,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.academic_information.no_failing_grade}
                         onChange={onChange}
                     />
-                    Do you have any failed, INC, dropped, or withdrawn final grades?
+                    Do not have any failed, INC, dropped, or withdrawn final grades?
                 </label>
             </div>
         </div>
@@ -360,49 +360,43 @@ export const MultiSteps = ({ onStepDataChange }) => {
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
         const fieldValue = type === 'checkbox' ? checked : value;
-        
-        setFormData(prevData => {
-            let newData;
-            
-            if (currentStep === 1) {
-                newData = {
-                    ...prevData,
-                    personal_information: {
-                        ...prevData.personal_information,
-                        [name]: fieldValue
-                    }
-                };
-            } else if (currentStep === 2) {
-                newData = {
-                    ...prevData,
-                    academic_information: {
-                        ...prevData.academic_information,
-                        [name]: fieldValue
-                    }
-                };
-            } else if (currentStep === 3) {
-                newData = {
-                    ...prevData,
-                    social_information: {
-                        ...prevData.social_information,
-                        [name]: fieldValue
-                    }
-                };
-            }
-            
-            // Pass the updated data back to parent component
-            if (onStepDataChange) {
-                if (currentStep === 1) {
-                    onStepDataChange(newData.personal_information, currentStep);
-                } else if (currentStep === 2) {
-                    onStepDataChange(newData.academic_information, currentStep);
-                } else if (currentStep === 3) {
-                    onStepDataChange(newData.social_information, currentStep);
+        let newData;
+        if (currentStep === 1) {
+            newData = {
+                ...formData,
+                personal_information: {
+                    ...formData.personal_information,
+                    [name]: fieldValue
                 }
+            };
+        } else if (currentStep === 2) {
+            newData = {
+                ...formData,
+                academic_information: {
+                    ...formData.academic_information,
+                    [name]: fieldValue
+                }
+            };
+        } else if (currentStep === 3) {
+            newData = {
+                ...formData,
+                social_information: {
+                    ...formData.social_information,
+                    [name]: fieldValue
+                }
+            };
+        }
+        setFormData(newData);
+        // Call the callback after state update
+        if (onStepDataChange) {
+            if (currentStep === 1) {
+                onStepDataChange(newData.personal_information, currentStep);
+            } else if (currentStep === 2) {
+                onStepDataChange(newData.academic_information, currentStep);
+            } else if (currentStep === 3) {
+                onStepDataChange(newData.social_information, currentStep);
             }
-            
-            return newData;
-        });
+        }
     };
 
     const nextStep = () => {
@@ -433,7 +427,7 @@ export const MultiSteps = ({ onStepDataChange }) => {
     const handleSubmit = () => {
         // Implement form submission logic
         console.log('Form submitted:', formData);
-        onStepDataChange(formData, currentStep, true);
+        onStepDataChange(formData.social_information, currentStep, true);
     };
 
     return (

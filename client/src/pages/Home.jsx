@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeToogle } from "../components/ThemeToogle"
 import { SidePanel } from "../components/SidePanel"
 import { MultiSteps } from "../components/MultiSteps"
@@ -40,6 +40,7 @@ export const Home = () => {
         academic_information: {},
         social_information: {}
     });
+    const [shouldSubmit, setShouldSubmit] = useState(false);
     const navigate = useNavigate();
 
     const handleStepDataChange = (stepData, stepNumber, isFinalStep = false) => {
@@ -57,26 +58,27 @@ export const Home = () => {
             return newData;
         });
         if (isFinalStep) {
-            // Submit to backend with mapped keys
-            const backendData = mapToBackendKeys({
-                personal_information: stepNumber === 1 ? stepData : allFormData.personal_information,
-                academic_information: stepNumber === 2 ? stepData : allFormData.academic_information,
-                social_information: stepNumber === 3 ? stepData : allFormData.social_information,
-            });
+            setShouldSubmit(true); // trigger submit in useEffect
+        }
+    };
+
+    useEffect(() => {
+        if (shouldSubmit) {
             fetch("http://localhost:5000/match", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(backendData)
+                body: JSON.stringify(allFormData)
             })
             .then(res => res.json())
             .then(results => {
-                navigate("/results", { state: { results, userInputs: backendData } });
+                navigate("/results", { state: { results, userInputs: allFormData } });
             })
             .catch(err => {
                 alert("Error connecting to backend: " + err);
-            });
+            })
+            .finally(() => setShouldSubmit(false));
         }
-    };
+    }, [shouldSubmit, allFormData, navigate]);
 
     const sidePanelStyle = {
         width: '30%',

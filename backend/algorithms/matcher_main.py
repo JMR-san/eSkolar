@@ -223,7 +223,9 @@ class ScholarshipMatcher:
 
             except Exception as e:
                 errors_count += 1
-                print(f"Error processing scholarship {i+1}: {e}")
+                print(f"[DEBUG] Error processing scholarship {i+1}: {e}")
+                print(f"[DEBUG] User data at error: {self.user_data}")
+                print(f"[DEBUG] Scholarship at error: {scholarship}")
                 continue
 
         if errors_count > 0:

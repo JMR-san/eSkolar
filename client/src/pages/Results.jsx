@@ -135,30 +135,42 @@ export const Results = () => {
           <h2>Your Information</h2>
           {userInputs && Object.keys(userInputs).length > 0 ? (
             <div className="user-inputs-list" style={styles.userInputsList}>
-              {Object.entries(userInputs)
-                .filter(([key, value]) => value !== null && value !== undefined && value !== '' && value !== false)
-                .map(([key, value]) => {
-                  let displayValue = String(value);
-                  
-                  // Convert boolean true to "YES"
-                  if (value === true) {
-                    displayValue = 'Yes';
-                  }
-                  
-                  let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                  if (key === 'no_below_225_major') label = 'No Below 2.25 Major';
-                  if (key === 'no_below_250_minor') label = 'No Below 2.50 Minor';
-                  if (key === 'curr_program') label = 'College Program';
-                  if (key === 'curr_gwa') label = 'Current GWA';
-                  if (key === 'current_shs_strand') label = 'Senior Highschool Strand';
-                  if (key === 'is_good_moral') label = 'Has Good Moral';
-                  
-                  return (
-                    <div key={key} className="user-input-item" style={styles.userInputItem}>
-                      <strong>{label}:</strong> {displayValue}
-                    </div>
-                  );
-                })}
+              {[
+                "personal_information",
+                "academic_information",
+                "social_information"
+              ].map(section => {
+                const sectionData = userInputs[section];
+                if (!sectionData) return null;
+                if (section === "social_information") {
+                  console.log("SOCIAL INFO DATA:", sectionData);
+                  console.log("SOCIAL INFO ENTRIES:", Object.entries(sectionData));
+                }
+                return (
+                  <div key={section} className="user-input-item" style={styles.userInputItem}>
+                    <strong>
+                      {section.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}:
+                    </strong>
+                    <ul style={{ margin: 0, paddingLeft: 16 }}>
+                      {Object.entries(sectionData)
+                        .filter(([key, value]) =>
+                          typeof value !== 'object' &&
+                          key !== 'personal_information' &&
+                          key !== 'academic_information' &&
+                          key !== 'social_information'
+                        )
+                        .map(([key, value]) => (
+                          <li key={key}>
+                            <strong>
+                              {key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}:
+                            </strong>{' '}
+                            {value === true ? 'Yes' : value === false ? 'No' : value === '' ? 'Not specified' : String(value)}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div>No user input data available.</div>
