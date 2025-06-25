@@ -6,7 +6,7 @@ export const SidePanel = () => {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: 'url("client/public/pylon.jpg")',
+            backgroundImage: 'url("public/pylon.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: '60% 40%',
             opacity: 0.5,
@@ -15,7 +15,7 @@ export const SidePanel = () => {
         }} />
         <div className="h-40 bg-sidebar-logo" style={{ position: 'relative', zIndex: 1 }}>
             <img 
-                src="client/public/eskolar.png" 
+                src="public/eskolar.png" 
                 alt="eskolar" 
                 className="w-full h-full object-contain dark:invert dark:brightness-0 dark:contrast-200"
             />
