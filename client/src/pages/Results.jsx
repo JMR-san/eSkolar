@@ -141,6 +141,7 @@ export const Results = () => {
                 "social_information"
               ].map(section => {
                 const sectionData = userInputs[section];
+                
                 if (!sectionData) return null;
                 if (section === "social_information") {
                   console.log("SOCIAL INFO DATA:", sectionData);
@@ -159,14 +160,24 @@ export const Results = () => {
                           key !== 'academic_information' &&
                           key !== 'social_information'
                         )
-                        .map(([key, value]) => (
-                          <li key={key}>
-                            <strong>
-                              {key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}:
-                            </strong>{' '}
-                            {value === true ? 'Yes' : value === false ? 'No' : value === '' ? 'Not specified' : String(value)}
-                          </li>
-                        ))}
+                        .map(([key, value]) => {
+                          let label = key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+                          if (key === 'no_below_225_major') label = 'No Below 2.25 Major';
+                          if (key === 'no_below_250_minor') label = 'No Below 2.50 Minor';
+                          if (key === 'curr_gwa') label = 'Current GWA';
+                          if (key === 'curr_program') label = 'College Program';
+                          if (key === 'is_good_moral') label = 'Has Good Moral';
+                          if (key === 'current_shs_strand') label = 'Senior High School Strand';
+                          return (
+                            <li key={key}>
+                              <strong>
+                                {label}:
+                              </strong>{' '}
+                              
+                              {value === true ? 'Yes' : value === false ? 'No' : value === '' ? 'Not specified' : String(value)}
+                            </li>
+                          );
+                        })}
                     </ul>
                   </div>
                 );
@@ -211,6 +222,8 @@ export const Results = () => {
                           .map(([key, value]) => {
                             let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                             if (key === 'no_below_225_major') label = 'No Below 2.25 Major';
+                            if (key === 'gwa_numerical') label = 'GWA Numerical';
+                            if (key === 'gwa_percentage') label = 'GWA Percentage';
                             if (key === 'no_below_250_minor') label = 'No Below 2.50 Minor';
                             if ((key === 'scholarship_link') && value) {
                               return (

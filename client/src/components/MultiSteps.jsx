@@ -212,7 +212,7 @@ const AcademicInformation = ({ formData, onChange }) => {
                         checked={formData.academic_information.has_other_scholarships}
                         onChange={onChange}
                     />
-                    You are not currenlty receiving other scholarships?
+                    Are you currenlty receiving other scholarships?
                 </label>
             </div>
             <h3>If currently a Senior High School Student:</h3>
